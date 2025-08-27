@@ -37,9 +37,6 @@ const generateId = () => {
 
 // Rutas
 
-app.get('*', (req, res) => {
-  res.sendFile('index.html', { root: 'dist' })});
-
 
 app.get('/api/persons', (req, res) => { // Obtiene todos los contactos desde el servidor y devuelve los datos
   res.json(persons);
@@ -119,6 +116,9 @@ const nameExists = persons.some(p => p.name === name && p.id !== id);
 const unknownEndpoint = (request, response) => { // Middleware para manejar endpoints desconocidos
   response.status(404).send({ error: 'unknown endpoint' })
 }
+
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root: 'dist' })});
 
 app.use(unknownEndpoint)
 
